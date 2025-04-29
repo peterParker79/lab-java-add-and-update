@@ -2,6 +2,7 @@ package com.ironhack.addupdate.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
@@ -12,14 +13,16 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="patient_id")
     private int patientId;
-    @NotEmpty("El nombre no puede estar vacío!")
+
+    @NotBlank(message = "El nombre no puede estar vacío!")
     String name;
 
     //@Column(name="date_of_bird")
     //asumo que el formato es siempre YYYY-MM-DD y podemos comparar posteriormente fechas
-    @NotEmpty("La fecha no puede estar vacía!")
+    @NotBlank(message = "La fecha no puede estar vacía!")
     String dateOfBirth;
-    @NotEmpty
+
+
     @ManyToOne // muchos pacientes pueden ser atendidos por un mismo empleado
     @JoinColumn(name = "admitted_by", referencedColumnName = "employee_Id") // Clave foranea
     Employee admittedBy;
