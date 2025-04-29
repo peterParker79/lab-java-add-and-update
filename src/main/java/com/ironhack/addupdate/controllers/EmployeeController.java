@@ -2,6 +2,7 @@ package com.ironhack.addupdate.controllers;
 
 import com.ironhack.addupdate.models.Employee;
 import com.ironhack.addupdate.repositories.EmployeeRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +15,9 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @PostMapping("/add-new-doctor")
+    @PostMapping("/employee/add-new-doctor")
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee addEmployee(@RequestBody Employee employee) {
+    public Employee addEmployee(@RequestBody @Valid Employee employee) {
         return employeeRepository.save(employee);
 
     }

@@ -2,6 +2,8 @@ package com.ironhack.addupdate.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="employee")
@@ -10,21 +12,22 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="employee_id")
     private int employeeId;
-
+    @NotEmpty("El departamento no puede estar vacío!")
     @Enumerated(EnumType.STRING)
     Department department;
-
+    @NotEmpty("El nombre no puede estar vacío!")
     String name;
 
+    @NotEmpty("El estado no puede ser vacío!")
     @Enumerated(EnumType.STRING)
     Status status;
 
     public Employee() {
     }
 
-    public Employee(int employeeId, Department department, String name, Status status) {
+    public Employee(Department department, String name, Status status) {
 
-        this.employeeId = employeeId;
+
         this.department = department;
         this.name = name;
         this.status = status;
