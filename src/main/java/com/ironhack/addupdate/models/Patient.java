@@ -15,12 +15,12 @@ public class Patient {
     private int patientId;
 
     @NotBlank(message = "El nombre no puede estar vacío!")
-    String name;
+    private String name;
 
     //@Column(name="date_of_bird")
     //asumo que el formato es siempre YYYY-MM-DD y podemos comparar posteriormente fechas
     @NotBlank(message = "La fecha no puede estar vacía!")
-    String dateOfBirth;
+    private String dateOfBirth;
 
 
     @ManyToOne // muchos pacientes pueden ser atendidos por un mismo empleado

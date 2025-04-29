@@ -21,7 +21,7 @@ public class EmployeeController {
 
     }
 
-    @PatchMapping("/employee/{id}")
+    @PatchMapping("/employee/update-status/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Employee updateStatus(@PathVariable int id, @RequestBody EmployeePatchDTO employeePatchDTO) {
         Employee exisitingEmployee = employeeRepository.findById(id).orElseThrow(()->
@@ -32,8 +32,20 @@ public class EmployeeController {
         }
         return employeeRepository.save(exisitingEmployee);
 
+
     }
 
+    @PatchMapping("/employee/update-department/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Employee updateDepartment(@PathVariable int id, @RequestBody EmployeePatchDTO employeePatchDTO) {
+        Employee exisitingEmployee = employeeRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (employeePatchDTO.getDepartment() != null) {
+            exisitingEmployee.setDepartment(employeePatchDTO.getDepartment());
+        }
+        return employeeRepository.save(exisitingEmployee);
+    }
 
 
 
