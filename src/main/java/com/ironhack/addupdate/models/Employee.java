@@ -23,6 +23,7 @@ public class Employee {
     }
 
     public Employee(int employeeId, Department department, String name, Status status) {
+
         this.employeeId = employeeId;
         this.department = department;
         this.name = name;
