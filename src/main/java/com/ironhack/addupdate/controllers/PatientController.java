@@ -108,7 +108,7 @@ public List<Patient> findAll() {
         return patientRepository.save(patient);
     }
 
-    @PatchMapping("api/patients/update/{id}")
+    @PatchMapping("api/patient/update/{id}")
     @ResponseStatus(HttpStatus.CREATED) //201 Creado
     public Patient updatePatient(@PathVariable int id, @RequestBody PatientPatchDTO patientPatchDTO) {
 
