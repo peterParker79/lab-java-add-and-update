@@ -27,13 +27,14 @@ public class PatientController {
     @Autowired
     private EmployeeRepository employeeRepository;
 //--------------------------------------------------------------------------------
-@GetMapping("/patients")
+@GetMapping("api/patient")
 @ResponseStatus(HttpStatus.OK)
+
 public List<Patient> findAll() {
     return patientRepository.findAll();
 }
 
-    @GetMapping("/patients/id/{id}")
+    @GetMapping("api/patient/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Patient findById(@PathVariable("id") int id) {
         Optional<Patient> optional = patientRepository.findById(id);
@@ -46,7 +47,7 @@ public List<Patient> findAll() {
     // Convertir las fechas a tipo LocalDate para poder comparar.
     // Usar @RequestParam para recibir los rangos como query parameters
     //TODO metodo en repo para buscar en ese rango de fechas
-    @GetMapping("/patients/by-range-date")
+    @GetMapping("api/patient/by-range-date")
     @ResponseStatus(HttpStatus.OK)
     public List<Patient> getPatientsByDateOfBirthRange(
             @RequestParam("startDate") String startDate,
@@ -70,7 +71,7 @@ public List<Patient> findAll() {
     //8. Obtención de los pacientes  por departamento del médico. ej: Todos los pacientes de cardiologia
     // A través del id de empleado(medico) muestra los pacientes que han sido admitidos por ese medico
 
-    @GetMapping("/patients/admit-employee/{employeeId}")
+    @GetMapping("api/patient/admit-employee/{employeeId}")
     @ResponseStatus(HttpStatus.OK)
     public List<Patient> getPatientsByDepartment(@PathVariable("employeeId") int employeeId) {
         Employee employee= employeeRepository.findByEmployeeId(employeeId);
@@ -84,7 +85,7 @@ public List<Patient> findAll() {
         Obtendremos resultados cuando el estado del id del Empleado introducido
         sea OFF
      */
-    @GetMapping("/patients/employee-off/{idEmployeeStatusOff}")
+    @GetMapping("api/patient/employee-off/{idEmployeeStatusOff}")
     @ResponseStatus(HttpStatus.OK)
     public List<Patient> getPatientsByStatusOff(@PathVariable("idEmployeeStatusOff") int idEmployeeOff) {
         Employee employee = employeeRepository.findByEmployeeId(idEmployeeOff);
@@ -100,14 +101,14 @@ public List<Patient> findAll() {
 
 
 
-    @PostMapping("/patients/add-new-patient")
+    @PostMapping("api/patient/add-new-patient")
     @ResponseStatus(HttpStatus.CREATED) //201 Creado
     public Patient addPatient(@RequestBody @Valid Patient patient) {
 
         return patientRepository.save(patient);
     }
 
-    @PatchMapping("/patients/update/{id}")
+    @PatchMapping("api/patients/update/{id}")
     @ResponseStatus(HttpStatus.CREATED) //201 Creado
     public Patient updatePatient(@PathVariable int id, @RequestBody PatientPatchDTO patientPatchDTO) {
 

@@ -20,7 +20,7 @@ public class EmployeeController {
 
     //--------------------------------------------------------------------
 
-    @GetMapping("/employees")
+    @GetMapping("/employee")
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getEmployees() {
         return employeeRepository.findAll();
@@ -28,14 +28,14 @@ public class EmployeeController {
 
 
 
-    @GetMapping("/employees/id/{id}")
+    @GetMapping("/employee/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Employee getEmployeeId(@PathVariable(name="id") int id) {
         return employeeRepository.findByEmployeeId(id);
     }
 
 
-    @GetMapping("/employees/status/{status}")
+    @GetMapping("/employee/status/{status}")
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getEmployeesStatus(@PathVariable(name="status") String status) {
         try {
@@ -53,7 +53,7 @@ public class EmployeeController {
 
 
 
-    @GetMapping("/employees/department/{department}")
+    @GetMapping("/employee/department/{department}")
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getEmployeesDepartment(@PathVariable(name="department") String department) {
         try {
@@ -67,14 +67,14 @@ public class EmployeeController {
         }
     }
     //--------------------------------------------------------------------
-    @PostMapping("/employees/add-new-doctor")
+    @PostMapping("/employee/add-new-doctor")
     @ResponseStatus(HttpStatus.CREATED)
     public Employee addEmployee(@RequestBody @Valid Employee employee) {
         return employeeRepository.save(employee);
 
     }
 
-    @PatchMapping("/employees/update-status/{id}")
+    @PatchMapping("/employee/update-status/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Employee updateStatus(@PathVariable int id, @RequestBody EmployeePatchDTO employeePatchDTO) {
         Employee exisitingEmployee = employeeRepository.findById(id).orElseThrow(()->
@@ -88,7 +88,7 @@ public class EmployeeController {
 
     }
 
-    @PatchMapping("/employees/update-department/{id}")
+    @PatchMapping("/employee/update-department/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Employee updateDepartment(@PathVariable int id, @RequestBody EmployeePatchDTO employeePatchDTO) {
         Employee exisitingEmployee = employeeRepository.findById(id).orElseThrow(() ->
